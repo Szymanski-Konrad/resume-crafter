@@ -149,3 +149,10 @@ ios/Flutter/flutter_export_environment.sh
 
 # jks files
 *.jks
+
+# app config
+app_config.json
+
+# Freezed
+*.freezed.dart
+*.g.dart
