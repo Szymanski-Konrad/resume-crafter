@@ -6,6 +6,8 @@ part 'resume_model.g.dart';
 @freezed
 class ResumeModel with _$ResumeModel {
   factory ResumeModel({
+    required String id,
+    required String userId,
     required ResumeBasics basics,
     @Default([]) List<ResumeLink> links,
     @Default([]) List<ResumeExperience> experience,
