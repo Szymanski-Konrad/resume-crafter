@@ -1,39 +1,36 @@
 import 'package:appwrite/models.dart';
 import 'package:equatable/equatable.dart';
-import 'package:formz/formz.dart';
-import 'package:resume_crafter/utils/form_field_types.dart';
+
+enum AuthStatus {
+  authenticated,
+  unauthenticated,
+  inProgress,
+  unknown,
+}
 
 class AuthState extends Equatable {
-  final FormzSubmissionStatus status;
-  final Email email;
-  final Password password;
+  final AuthStatus authStatus;
   final String? errorMessage;
   final User? user;
 
   const AuthState({
-    this.status = FormzSubmissionStatus.initial,
-    this.email = const Email.pure(),
-    this.password = const Password.pure(),
+    this.authStatus = AuthStatus.unknown,
     this.errorMessage,
     this.user,
   });
 
   AuthState copyWith({
-    FormzSubmissionStatus? status,
-    Email? email,
-    Password? password,
+    AuthStatus? authStatus,
     String? errorMessage,
     User? user,
   }) {
     return AuthState(
-      status: status ?? this.status,
-      email: email ?? this.email,
-      password: password ?? this.password,
+      authStatus: authStatus ?? this.authStatus,
       errorMessage: errorMessage ?? this.errorMessage,
       user: user ?? this.user,
     );
   }
 
   @override
-  List<Object?> get props => [status, email, password, errorMessage, user];
+  List<Object?> get props => [authStatus, errorMessage, user];
 }
