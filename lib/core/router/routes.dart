@@ -3,4 +3,6 @@ abstract class AppRoutes {
 
   static String signIn = 'signIn';
   static String signUp = 'signUp';
+
+  static String home = 'home';
 }

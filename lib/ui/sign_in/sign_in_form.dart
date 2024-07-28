@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resume_crafter/bloc/sign_in/sign_in_cubit.dart';
 import 'package:resume_crafter/bloc/sign_in/sign_in_state.dart';
+import 'package:resume_crafter/core/router/routes.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({super.key});
@@ -12,7 +14,7 @@ class SignInForm extends StatelessWidget {
     return BlocListener<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state.status.isSuccess) {
-          //TODO: Redirect to home page
+          context.pushReplacement(AppRoutes.home);
           return;
         } else if (state.status.isFailure) {
           ScaffoldMessenger.of(context)
