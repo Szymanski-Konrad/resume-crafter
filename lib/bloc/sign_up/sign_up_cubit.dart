@@ -11,47 +11,29 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void onEmailChanged(String value) {
     final email = Email.dirty(value);
-    emit(
-      state.copyWith(
-        email: email,
-        errorMessage: errorMessage,
-        isValid: Formz.validate(
-          [
-            email,
-            state.password,
-            state.confirmPassword,
-          ],
-        ),
-      ),
-    );
+    emit(state.copyWith(email: email));
+    _checkFormValid();
   }
 
   void onPasswordChanged(String value) {
     final password = Password.dirty(value);
-    emit(
-      state.copyWith(
-        password: password,
-        errorMessage: errorMessage,
-        isValid: Formz.validate(
-          [
-            password,
-            state.email,
-            state.confirmPassword,
-          ],
-        ),
-      ),
-    );
+    emit(state.copyWith(password: password));
+    _checkFormValid();
   }
 
   void onConfirmPasswordChanged(String value) {
     final confirmPassword = Password.dirty(value);
+    emit(state.copyWith(confirmPassword: confirmPassword));
+    _checkFormValid();
+  }
+
+  void _checkFormValid() {
     emit(
       state.copyWith(
-        confirmPassword: confirmPassword,
         errorMessage: errorMessage,
         isValid: Formz.validate(
           [
-            confirmPassword,
+            state.confirmPassword,
             state.email,
             state.password,
           ],
@@ -80,7 +62,11 @@ class SignUpCubit extends Cubit<SignUpState> {
       );
       emit(state.copyWith(status: FormzSubmissionStatus.success, user: user));
     } catch (e) {
-      emit(state.copyWith(errorMessage: e.toString(), user: null));
+      emit(state.copyWith(
+        errorMessage: e.toString(),
+        user: null,
+        status: FormzSubmissionStatus.failure,
+      ));
     }
   }
 }

@@ -5,7 +5,9 @@ import 'package:resume_crafter/repositories/auth/base_auth_repository.dart';
 class AuthCubit extends Cubit<AuthState> {
   final BaseAuthRepository authRepository;
 
-  AuthCubit(this.authRepository) : super(const AuthState());
+  AuthCubit({
+    required this.authRepository,
+  }) : super(const AuthState());
 
   Future<void> logout() async {
     try {

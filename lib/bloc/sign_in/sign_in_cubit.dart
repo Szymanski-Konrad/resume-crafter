@@ -49,7 +49,11 @@ class SignInCubit extends Cubit<SignInState> {
       final user = await authRepository.getCurrentUser();
       emit(state.copyWith(status: FormzSubmissionStatus.success, user: user));
     } catch (e) {
-      emit(state.copyWith(errorMessage: e.toString(), user: null));
+      emit(state.copyWith(
+        errorMessage: e.toString(),
+        user: null,
+        status: FormzSubmissionStatus.failure,
+      ));
     }
   }
 }
