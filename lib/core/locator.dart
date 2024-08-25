@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:resume_crafter/repositories/auth/appwrite_auth_repository.dart';
 import 'package:resume_crafter/repositories/auth/base_auth_repository.dart';
+import 'package:resume_crafter/repositories/auth/resume/appwrite_resume_repository.dart';
+import 'package:resume_crafter/repositories/auth/resume/base_resume_repository.dart';
 import 'package:resume_crafter/services/appwrite_service.dart';
 
 final locator = GetIt.instance;
@@ -17,6 +19,9 @@ class ServiceLocator {
   Future<void> _initRepositories() async {
     locator.registerLazySingleton<BaseAuthRepository>(
       () => AppwriteAuthRepository(account: AppwriteService.instance.account),
+    );
+    locator.registerLazySingleton<BaseResumeRepository>(
+      () => AppwriteResumeRepository(appwriteService: AppwriteService.instance),
     );
   }
 

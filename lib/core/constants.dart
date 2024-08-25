@@ -10,4 +10,6 @@ abstract class Constants {
       const String.fromEnvironment('APPWRITE_DATABASE_ID');
   static String appwriteResumesCollectionId =
       const String.fromEnvironment('APPWRITE_RESUME_COLLECTION_ID');
+  static String appwriteResumesMetadataCollectionId =
+      const String.fromEnvironment('APPWRITE_RESUME_METADATA_COLLECTION_ID');
 }
