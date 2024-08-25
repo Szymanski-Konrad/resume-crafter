@@ -1,0 +1,4 @@
+enum ResumeStep {
+  name,
+  sections,
+}

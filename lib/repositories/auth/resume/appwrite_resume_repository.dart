@@ -20,7 +20,7 @@ class AppwriteResumeRepository extends BaseResumeRepository {
     final documentId = ID.unique();
     await appwriteService.databases.createDocument(
       databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesCollectionId,
+      collectionId: Constants.appwriteResumesMetadataCollectionId,
       documentId: documentId,
       data: ResumeMetadata(
         id: documentId,
@@ -38,7 +38,7 @@ class AppwriteResumeRepository extends BaseResumeRepository {
   }) async {
     final response = await appwriteService.databases.listDocuments(
       databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesCollectionId,
+      collectionId: Constants.appwriteResumesMetadataCollectionId,
       queries: [
         Query.equal(ResumeMetadataFields.userId, userId),
       ],
@@ -91,7 +91,7 @@ class AppwriteResumeRepository extends BaseResumeRepository {
   }) async {
     await appwriteService.databases.updateDocument(
       databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesCollectionId,
+      collectionId: Constants.appwriteResumesMetadataCollectionId,
       documentId: resumeMetadataId,
       data: resumeMetadata.toJson(),
     );
