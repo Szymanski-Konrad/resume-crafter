@@ -7,6 +7,7 @@ part 'home_state.g.dart';
 @freezed
 class HomeState with _$HomeState {
   factory HomeState({
+    @Default(false) bool isLoading,
     @Default([]) List<ResumeMetadata> resumesMetadata,
   }) = _HomeState;
 

@@ -13,7 +13,11 @@ class HomeCubit extends Cubit<HomeState> {
   final BaseAuthRepository authRepository;
   final BaseResumeRepository resumeRepository;
 
-  Future<void> init() async {}
+  Future<void> init() async {
+    emit(state.copyWith(isLoading: true));
+    await loadResumeMetadata();
+    emit(state.copyWith(isLoading: false));
+  }
 
   Future<void> loadResumeMetadata() async {
     final user = await authRepository.getCurrentUser();
