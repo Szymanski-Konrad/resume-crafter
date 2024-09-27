@@ -1,10 +1,9 @@
-import 'package:appwrite/models.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resume_crafter/data/resume_model.dart';
 import 'package:resume_crafter/utils/validation/validation_value.dart';
 import 'package:resume_crafter/utils/validation/validators.dart';
+import 'package:uuid/uuid.dart';
 
 part 'basic_info_state.dart';
 part 'basic_info_cubit.freezed.dart';
@@ -15,46 +14,46 @@ class BasicInfoCubit extends Cubit<BasicInfoState> {
           BasicInfoState(
             address: ValidationValue(
               value: basics?.address,
-              validatorChain: LogicalOrValidatorChain([
+              validatorChain: const LogicalOrValidatorChain([
                 NullValidator(),
                 NotEmptyStringValidator(),
               ]),
             ),
             birthday: ValidationValue(
               value: basics?.birthday,
-              validatorChain: LogicalOrValidatorChain([]),
+              validatorChain: const LogicalOrValidatorChain([]),
             ),
             email: ValidationValue(
               value: basics?.email,
-              validatorChain: LogicalAndValidatorChain([
+              validatorChain: const LogicalAndValidatorChain([
                 NotNullValidator(),
                 EmailValidator(),
               ]),
             ),
             firstName: ValidationValue(
               value: basics?.firstName,
-              validatorChain: LogicalAndValidatorChain([
+              validatorChain: const LogicalAndValidatorChain([
                 NotNullValidator(),
                 NotEmptyStringValidator(),
               ]),
             ),
             lastName: ValidationValue(
               value: basics?.lastName,
-              validatorChain: LogicalAndValidatorChain([
+              validatorChain: const LogicalAndValidatorChain([
                 NotNullValidator(),
                 NotEmptyStringValidator(),
               ]),
             ),
             phone: ValidationValue(
               value: basics?.phone,
-              validatorChain: LogicalOrValidatorChain([
+              validatorChain: const LogicalOrValidatorChain([
                 NullValidator(),
                 NotEmptyStringValidator(),
               ]),
             ),
             summary: ValidationValue(
               value: basics?.summary,
-              validatorChain: LogicalAndValidatorChain([
+              validatorChain: const LogicalAndValidatorChain([
                 NotNullValidator(),
                 NotEmptyStringValidator(),
               ]),
@@ -64,15 +63,11 @@ class BasicInfoCubit extends Cubit<BasicInfoState> {
 
   ResumeBasics? buildBasics() {
     if (!state.isValid) {
-      state.validationFields.forEach((element) {
-        if (element.isNotValid) {
-          print('${element.toString()} - ${element.displayError}');
-        }
-      });
       return null;
     }
 
     return ResumeBasics(
+      id: state.initialData?.id ?? const Uuid().v4(),
       firstName: state.firstName.value,
       lastName: state.lastName.value,
       email: state.email.value,

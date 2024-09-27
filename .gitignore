@@ -156,3 +156,6 @@ app_config.json
 # Freezed
 *.freezed.dart
 *.g.dart
+
+# FVM Version Cache
+.fvm/

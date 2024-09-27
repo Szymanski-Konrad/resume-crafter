@@ -7,6 +7,7 @@ import 'package:resume_crafter/pages/resume/bloc/resume_cubit.dart';
 import 'package:resume_crafter/pages/resume/page/sections/basic_info/cubit/basic_info_cubit.dart';
 import 'package:resume_crafter/ui/text_fields.dart';
 import 'package:resume_crafter/utils/extensions/build_context_extensions.dart';
+import 'package:resume_crafter/utils/validation/validation_value.dart';
 
 class BasicInfoPage extends StatelessWidget {
   const BasicInfoPage({super.key});
@@ -44,11 +45,15 @@ class BasicInfoPage extends StatelessWidget {
                   ValidatedTextField(
                     validationValue: state.email,
                     label: context.l10n.email,
+                    errorMessage:
+                        state.email.displayError?.errorMessage(context),
                     isRequired: true,
                   ),
                   Gap.m,
                   ValidatedTextField(
                     validationValue: state.phone,
+                    errorMessage:
+                        state.phone.displayError?.errorMessage(context),
                     label: context.l10n.phone,
                   ),
                   Gap.m,
@@ -73,7 +78,7 @@ class BasicInfoPage extends StatelessWidget {
                       context.read<ResumeCubit>().updateBasics(basics);
                       context.pop();
                     },
-                    child: Text('Save changes'),
+                    child: const Text('Save changes'),
                   ),
                 ],
               ),

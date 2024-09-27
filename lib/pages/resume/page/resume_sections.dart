@@ -163,24 +163,25 @@ class ResumeExperienceSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final experience = state.experience;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.experience,
+                extra: null,
+              ),
             ),
-            if (info == null)
-              SectionHint(sectionType: resumeSectionType)
+            if (experience.isEmpty)
+              SectionHint(sectionType: resumeSectionType),
+              )
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              ...experience.map((item) => ExperienceShowcase(
+                    experience: item,
+                  )),
             ],
           ],
         );

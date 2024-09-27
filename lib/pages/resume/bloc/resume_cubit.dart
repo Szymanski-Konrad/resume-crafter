@@ -44,4 +44,28 @@ class ResumeCubit extends Cubit<ResumeState> {
     debugPrint(basics.toString());
     emit(state.copyWith(basics: basics));
   }
+
+  void updateExperience(ResumeExperience experience) {
+    final list = List.of(state.experience);
+    final index = list.indexWhere((element) => element.id == experience.id);
+    if (index == -1) {
+      list.add(experience);
+    } else {
+      list[index] = experience;
+    }
+    list.sort((a, b) {
+      final aStartDate = a.startDate;
+      final bStartDate = b.startDate;
+      if (aStartDate == null && bStartDate == null) {
+        return 0;
+      } else if (aStartDate == null) {
+        return -1;
+      } else if (bStartDate == null) {
+        return 1;
+      } else {
+        return aStartDate.compareTo(bStartDate);
+      }
+    });
+    emit(state.copyWith(experience: list));
+  }
 }

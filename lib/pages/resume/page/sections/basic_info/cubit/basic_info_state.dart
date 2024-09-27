@@ -3,6 +3,7 @@ part of 'basic_info_cubit.dart';
 @freezed
 class BasicInfoState with _$BasicInfoState {
   const factory BasicInfoState({
+    ResumeBasics? initialData,
     required ValidationValue<String?> firstName,
     required ValidationValue<String?> lastName,
     required ValidationValue<DateTime?> birthday,

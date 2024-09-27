@@ -108,7 +108,6 @@ class ResumeSectionsView extends StatelessWidget {
                   child: ResumeSectionView(section: section),
                 );
               }),
-              ResumeSectionView(section: ResumeSectionType.basicInfo),
               if (state.nonSelectedSections.isNotEmpty) ...[
                 Text(
                   context.l10n.whatSectionsYouWant,

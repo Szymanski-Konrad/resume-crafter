@@ -6,6 +6,8 @@ import 'package:resume_crafter/data/resume_model.dart';
 import 'package:resume_crafter/pages/resume/bloc/resume_cubit.dart';
 import 'package:resume_crafter/pages/resume/page/sections/basic_info/cubit/basic_info_cubit.dart';
 import 'package:resume_crafter/pages/resume/page/sections/basic_info/ui/basic_info_page.dart';
+import 'package:resume_crafter/pages/resume/page/sections/experience/cubit/experience_cubit.dart';
+import 'package:resume_crafter/pages/resume/page/sections/experience/ui/experience_page.dart';
 import 'package:resume_crafter/repositories/auth/base_auth_repository.dart';
 import 'package:resume_crafter/pages/home/home_page.dart';
 import 'package:resume_crafter/pages/resume/page/resume_page.dart';
@@ -66,6 +68,17 @@ final GoRouter router = GoRouter(
                     return BlocProvider(
                       create: (context) => BasicInfoCubit(data),
                       child: const BasicInfoPage(),
+                    );
+                  },
+                ),
+                GoRoute(
+                  name: AppRoutes.experience,
+                  path: AppRoutes.experience,
+                  builder: (context, state) {
+                    final data = state.extra as ResumeExperience?;
+                    return BlocProvider(
+                      create: (context) => ExperienceCubit(data),
+                      child: const ExperiencePage(),
                     );
                   },
                 ),

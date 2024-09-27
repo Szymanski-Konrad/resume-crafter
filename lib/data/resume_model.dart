@@ -30,6 +30,7 @@ class ResumeModel with _$ResumeModel {
 @freezed
 class ResumeBasics with _$ResumeBasics {
   factory ResumeBasics({
+    String? id,
     String? firstName,
     String? lastName,
     DateTime? birthday,
@@ -46,8 +47,9 @@ class ResumeBasics with _$ResumeBasics {
 @freezed
 class ResumeLink with _$ResumeLink {
   factory ResumeLink({
-    required LinkType linkType,
-    required String url,
+    String? id,
+    LinkType? linkType,
+    String? url,
   }) = _ResumeLink;
 
   factory ResumeLink.fromJson(Map<String, dynamic> json) =>
@@ -57,11 +59,12 @@ class ResumeLink with _$ResumeLink {
 @freezed
 class ResumeExperience with _$ResumeExperience {
   factory ResumeExperience({
-    required DateTime startDate,
+    String? id,
+    DateTime? startDate,
     DateTime? endDate,
-    required String company,
-    required String position,
-    required String description,
+    String? company,
+    String? position,
+    String? description,
   }) = _ResumeExperience;
 
   factory ResumeExperience.fromJson(Map<String, dynamic> json) =>
@@ -71,12 +74,13 @@ class ResumeExperience with _$ResumeExperience {
 @freezed
 class ResumeEducation with _$ResumeEducation {
   factory ResumeEducation({
-    required DateTime startDate,
+    String? id,
+    DateTime? startDate,
     DateTime? endDate,
-    required String university,
-    required String degree,
-    required String title,
-    required String description,
+    String? university,
+    String? degree,
+    String? title,
+    String? description,
   }) = _ResumeEducation;
 
   factory ResumeEducation.fromJson(Map<String, dynamic> json) =>
@@ -86,8 +90,9 @@ class ResumeEducation with _$ResumeEducation {
 @freezed
 class ResumeSkill with _$ResumeSkill {
   factory ResumeSkill({
-    required String name,
-    required int level,
+    String? id,
+    String? name,
+    int? level,
   }) = _ResumeSkill;
 
   factory ResumeSkill.fromJson(Map<String, dynamic> json) =>
@@ -97,9 +102,10 @@ class ResumeSkill with _$ResumeSkill {
 @freezed
 class ResumeCertificate with _$ResumeCertificate {
   factory ResumeCertificate({
-    required String name,
-    required String organization,
-    required DateTime issuedAt,
+    String? id,
+    String? name,
+    String? organization,
+    DateTime? issuedAt,
     DateTime? expireAt,
     String? description,
     String? website,
@@ -112,8 +118,9 @@ class ResumeCertificate with _$ResumeCertificate {
 @freezed
 class ResumeLanguage with _$ResumeLanguage {
   factory ResumeLanguage({
-    required String name,
-    required String level,
+    String? id,
+    String? name,
+    String? level,
   }) = _ResumeLanguage;
 
   factory ResumeLanguage.fromJson(Map<String, dynamic> json) =>
@@ -123,9 +130,10 @@ class ResumeLanguage with _$ResumeLanguage {
 @freezed
 class ResumePersonalProject with _$ResumePersonalProject {
   factory ResumePersonalProject({
-    required String name,
-    required String description,
-    required DateTime startDate,
+    String? id,
+    String? name,
+    String? description,
+    DateTime? startDate,
     DateTime? endDate,
     String? website,
   }) = _ResumePersonalProject;
@@ -137,9 +145,10 @@ class ResumePersonalProject with _$ResumePersonalProject {
 @freezed
 class ResumePublication with _$ResumePublication {
   factory ResumePublication({
-    required String name,
-    required String description,
-    required DateTime publishDate,
+    String? id,
+    String? name,
+    String? description,
+    DateTime? publishDate,
     String? website,
   }) = _ResumePublication;
 
@@ -150,13 +159,14 @@ class ResumePublication with _$ResumePublication {
 @freezed
 class ResumeReference with _$ResumeReference {
   factory ResumeReference({
-    required String name,
-    required String website,
-    required String jobTitle,
-    required String company,
-    required String referenceEmail,
+    String? id,
+    String? name,
+    String? website,
+    String? jobTitle,
+    String? company,
+    String? referenceEmail,
     String? referencePhone,
-    required String description,
+    String? description,
   }) = _ResumeReference;
 
   factory ResumeReference.fromJson(Map<String, dynamic> json) =>
@@ -166,11 +176,12 @@ class ResumeReference with _$ResumeReference {
 @freezed
 class ResumeVolunteering with _$ResumeVolunteering {
   factory ResumeVolunteering({
-    required String role,
-    required String organization,
-    required String description,
-    required String place,
-    required DateTime startDate,
+    String? id,
+    String? role,
+    String? organization,
+    String? description,
+    String? place,
+    DateTime? startDate,
     DateTime? endDate,
   }) = _ResumeVolunteering;
 
@@ -181,7 +192,7 @@ class ResumeVolunteering with _$ResumeVolunteering {
 @freezed
 class ResumeCustomSection with _$ResumeCustomSection {
   factory ResumeCustomSection({
-    required String name,
+    String? name,
     String? description,
     DateTime? startDate,
     DateTime? endDate,

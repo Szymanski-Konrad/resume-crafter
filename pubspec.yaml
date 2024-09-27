@@ -28,6 +28,7 @@ dependencies:
   json_annotation: ^4.9.0
   linkedin_login: ^3.0.5
   sign_in_button: ^3.2.0
+  uuid: ^4.5.0
 
 dev_dependencies:
   build_runner: ^2.4.9

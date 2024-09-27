@@ -3,6 +3,7 @@ part of 'experience_cubit.dart';
 @freezed
 class ExperienceState with _$ExperienceState {
   const factory ExperienceState({
+    ResumeExperience? initialData,
     required ValidationValue<DateTime?> startDate,
     required ValidationValue<DateTime?> endDate,
     required ValidationValue<String?> company,
