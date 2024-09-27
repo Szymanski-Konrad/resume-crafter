@@ -175,10 +175,8 @@ class ResumeExperienceSectionView extends StatelessWidget {
                 extra: null,
               ),
             ),
-            if (experience.isEmpty)
-              SectionHint(sectionType: resumeSectionType),
-              )
-            else ...[
+            if (experience.isEmpty) SectionHint(sectionType: resumeSectionType),
+            ...[
               ...experience.map((item) => ExperienceShowcase(
                     experience: item,
                   )),
