@@ -177,9 +177,15 @@ class ResumeExperienceSectionView extends StatelessWidget {
             ),
             if (experience.isEmpty) SectionHint(sectionType: resumeSectionType),
             ...[
-              ...experience.map((item) => ExperienceShowcase(
-                    experience: item,
-                  )),
+              ...experience.map(
+                (item) => ExperienceShowcase(
+                  experience: item,
+                  onEditTap: () => context.goNamed(
+                    AppRoutes.experience,
+                    extra: item,
+                  ),
+                ),
+              ),
             ],
           ],
         );
