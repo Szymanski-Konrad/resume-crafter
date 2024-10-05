@@ -69,5 +69,6 @@
   "referencePhone": "Reference phone",
   "place": "Place",
   "emptyField": "This field is empty",
-  "invalidEmail": "Invalid email format"
+  "invalidEmail": "Invalid email format",
+  "chooseDate": "Choose date"
 }

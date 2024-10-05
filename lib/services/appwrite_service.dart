@@ -1,5 +1,5 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:resume_crafter/core/constants.dart';
+import 'package:resume_crafter/core/environment.dart';
 
 class AppwriteService {
   static final AppwriteService instance = AppwriteService._internal();
@@ -18,9 +18,9 @@ class AppwriteService {
 
   void _initialize() {
     client = Client()
-        .setEndpoint(Constants.appwriteEndpoint)
-        .setProject(Constants.appwriteProjectId)
-        .setSelfSigned(status: Constants.appwriteSelfSigned);
+        .setEndpoint(Env.appwriteEndpoint)
+        .setProject(Env.appwriteProjectId)
+        .setSelfSigned(status: Env.appwriteSelfSigned);
     account = Account(client);
     databases = Databases(client);
   }

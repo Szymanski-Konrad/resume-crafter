@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:resume_crafter/bloc/auth/auth_cubit.dart';
 import 'package:resume_crafter/bloc/home/home_cubit.dart';
 import 'package:resume_crafter/core/locator.dart';
@@ -37,7 +38,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: const [
+          ...AppLocalizations.localizationsDelegates,
+          GlobalMaterialLocalizations.delegate,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         routerConfig: router,
         onGenerateTitle: (context) => context.l10n.appTitle,

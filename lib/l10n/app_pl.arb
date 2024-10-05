@@ -69,5 +69,6 @@
   "referencePhone": "Telefon referenta",
   "place": "Miejsce",
   "emptyField": "To jest pole puste",
-  "invalidEmail": "Niepoprawny email"
+  "invalidEmail": "Niepoprawny email",
+  "chooseDate": "Wybierz datę"
 }

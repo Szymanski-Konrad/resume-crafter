@@ -1,12 +1,14 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
+import 'package:resume_crafter/core/style/dimensions.dart';
 import 'package:resume_crafter/core/style/gaps.dart';
 import 'package:resume_crafter/core/style/paddings.dart';
 import 'package:resume_crafter/core/style/text_styles.dart';
 import 'package:resume_crafter/data/resume_model.dart';
 import 'package:resume_crafter/data/resume_section_type.dart';
+import 'package:resume_crafter/utils/extensions/build_context_extensions.dart';
+import 'package:resume_crafter/utils/extensions/duration_extensions.dart';
 import 'package:resume_crafter/utils/validation/validation_value.dart';
 
 enum SectionHeaderType { edit, addNew }
@@ -122,6 +124,7 @@ class DateTimePicker extends StatefulWidget {
 class _DateTimePickerState extends State<DateTimePicker> {
   @override
   Widget build(BuildContext context) {
+    final date = widget.validationValue.value;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -137,16 +140,18 @@ class _DateTimePickerState extends State<DateTimePicker> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.validationValue.value?.toIso8601String() ??
-                    'Wybierz datę',
+                date != null
+                    ? DateFormat(
+                            DateFormat.YEAR_ABBR_MONTH, context.l10n.localeName)
+                        .format(date)
+                    : 'Wybierz datę',
               ),
               Gap.l,
               IconButton(
                 onPressed: () {
-                  showDatePicker(
+                  showMonthPicker(
                     context: context,
-                    firstDate: DateTime(1970, 1, 1),
-                    lastDate: DateTime.now(),
+                    initialDate: DateTime.now(),
                   ).then((value) {
                     if (value != null) {
                       widget.validationValue.setValue(value);
@@ -169,23 +174,55 @@ class ExperienceShowcase extends StatelessWidget {
   const ExperienceShowcase({
     super.key,
     required this.experience,
+    required this.onEditTap,
   });
 
   final ResumeExperience experience;
+  final VoidCallback onEditTap;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(experience.company ?? ''),
-        Text(experience.position ?? ''),
-        Text(experience.startDate?.toIso8601String() ?? ''),
-        Text(experience.endDate?.toIso8601String() ?? ''),
-        Text(
-          experience.description ?? '',
-        )
-      ],
+    final startDate = experience.startDate;
+    final endDate = experience.endDate ?? DateTime.now();
+    final dateFormat = DateFormat(
+      DateFormat.YEAR_NUM_MONTH,
+      context.l10n.localeName,
+    );
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: BorderRadius.circular(AppDimens.m),
+      ),
+      padding: AppPaddings.mAllPadding,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  '${experience.position ?? ''} | ${experience.company ?? ''}',
+                  style: TextStyles.bodyBlack,
+                ),
+                if (startDate != null)
+                  Text(
+                    '${dateFormat.format(startDate)} - ${dateFormat.format(endDate)} (${endDate.difference(startDate).toTotalExpFormat()})',
+                    style: TextStyles.bodyGrey,
+                  ),
+                Text(
+                  experience.description ?? 'no description',
+                  style: TextStyles.bodyBlack,
+                )
+              ],
+            ),
+          ),
+          Gap.m,
+          IconButton(
+            onPressed: onEditTap,
+            icon: const Icon(Icons.edit),
+          ),
+        ],
+      ),
     );
   }
 }

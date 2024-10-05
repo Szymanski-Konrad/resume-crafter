@@ -1,5 +1,5 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:resume_crafter/core/constants.dart';
+import 'package:resume_crafter/core/environment.dart';
 import 'package:resume_crafter/data/resume_metadata.dart';
 import 'package:resume_crafter/data/resume_model.dart';
 import 'package:resume_crafter/repositories/auth/resume/base_resume_repository.dart';
@@ -19,8 +19,8 @@ class AppwriteResumeRepository extends BaseResumeRepository {
   }) async {
     final documentId = ID.unique();
     await appwriteService.databases.createDocument(
-      databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesMetadataCollectionId,
+      databaseId: Env.appwriteDatabaseId,
+      collectionId: Env.appwriteResumesMetadataCollectionId,
       documentId: documentId,
       data: ResumeMetadata(
         id: documentId,
@@ -37,8 +37,8 @@ class AppwriteResumeRepository extends BaseResumeRepository {
     required String userId,
   }) async {
     final response = await appwriteService.databases.listDocuments(
-      databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesMetadataCollectionId,
+      databaseId: Env.appwriteDatabaseId,
+      collectionId: Env.appwriteResumesMetadataCollectionId,
       queries: [
         Query.equal(ResumeMetadataFields.userId, userId),
       ],
@@ -62,8 +62,8 @@ class AppwriteResumeRepository extends BaseResumeRepository {
     required String resumeId,
   }) async {
     final response = await appwriteService.databases.getDocument(
-      databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesCollectionId,
+      databaseId: Env.appwriteDatabaseId,
+      collectionId: Env.appwriteResumesCollectionId,
       documentId: resumeId,
     );
     return ResumeModel.fromJson(response.data);
@@ -76,8 +76,8 @@ class AppwriteResumeRepository extends BaseResumeRepository {
     required ResumeModel resumeModel,
   }) async {
     await appwriteService.databases.updateDocument(
-      databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesCollectionId,
+      databaseId: Env.appwriteDatabaseId,
+      collectionId: Env.appwriteResumesCollectionId,
       documentId: resumeId,
       data: resumeModel.toJson(),
     );
@@ -90,8 +90,8 @@ class AppwriteResumeRepository extends BaseResumeRepository {
     required ResumeMetadata resumeMetadata,
   }) async {
     await appwriteService.databases.updateDocument(
-      databaseId: Constants.appwriteDatabaseId,
-      collectionId: Constants.appwriteResumesMetadataCollectionId,
+      databaseId: Env.appwriteDatabaseId,
+      collectionId: Env.appwriteResumesMetadataCollectionId,
       documentId: resumeMetadataId,
       data: resumeMetadata.toJson(),
     );
