@@ -116,3 +116,13 @@ class EmailValidator extends Validator<String> {
     return null;
   }
 }
+
+class UrlValidator extends Validator<String> {
+  const UrlValidator();
+
+  @override
+  ValidationValueError? validate(String value) {
+    if (!Uri.parse(value).isAbsolute) return ValidationValueError.invalidUrl;
+    return null;
+  }
+}

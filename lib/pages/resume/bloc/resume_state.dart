@@ -15,15 +15,15 @@ class ResumeState with _$ResumeState {
     @Default(false) bool isGenerating,
     String? resumeName,
     ResumeBasics? basics,
-    @Default([]) List<ResumeLink> links,
     @Default([]) List<ResumeExperience> experience,
     @Default([]) List<ResumeEducation> education,
+    @Default([]) List<ResumeLink> links,
     @Default([]) List<ResumeSkill> skills,
     @Default([]) List<ResumeCertificate> certificates,
     @Default([]) List<ResumeLanguage> languages,
     @Default([]) List<ResumePersonalProject> personalProjects,
     @Default([]) List<ResumePublication> publications,
-    @Default([]) List<ResumeReference> refrences,
+    @Default([]) List<ResumeReference> references,
     @Default([]) List<ResumeVolunteering> volunteering,
     @Default([]) List<ResumeCustomSection> customSections,
     @Default([]) List<ResumeSectionType> selectedSections,
@@ -40,6 +40,8 @@ extension ResumeStateExtension on ResumeState {
       selectedSections.contains(section);
 
   List<ResumeSectionType> get nonSelectedSections => ResumeSectionType.values
-      .where((element) => !selectedSections.contains(element))
+      .where((element) =>
+          !selectedSections.contains(element) ||
+          element == ResumeSectionType.customSection)
       .toList();
 }

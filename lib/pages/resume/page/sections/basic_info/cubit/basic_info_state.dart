@@ -1,7 +1,9 @@
 part of 'basic_info_cubit.dart';
 
 @freezed
-class BasicInfoState with _$BasicInfoState {
+class BasicInfoState with _$BasicInfoState, ValidationMixin {
+  const BasicInfoState._();
+
   const factory BasicInfoState({
     ResumeBasics? initialData,
     required ValidationValue<String?> firstName,
@@ -12,9 +14,8 @@ class BasicInfoState with _$BasicInfoState {
     required ValidationValue<String?> email,
     required ValidationValue<String?> summary,
   }) = _BasicInfoState;
-}
 
-extension BasicInfoStateExtension on BasicInfoState {
+  @override
   List<ValidationValue> get validationFields => [
         firstName,
         lastName,
@@ -24,6 +25,4 @@ extension BasicInfoStateExtension on BasicInfoState {
         email,
         summary,
       ];
-
-  bool get isValid => validationFields.every((element) => element.isValid);
 }

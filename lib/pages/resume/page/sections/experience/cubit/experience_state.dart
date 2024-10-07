@@ -1,7 +1,9 @@
 part of 'experience_cubit.dart';
 
 @freezed
-class ExperienceState with _$ExperienceState {
+class ExperienceState with _$ExperienceState, ValidationMixin {
+  const ExperienceState._();
+
   const factory ExperienceState({
     ResumeExperience? initialData,
     required ValidationValue<DateTime?> startDate,
@@ -10,9 +12,8 @@ class ExperienceState with _$ExperienceState {
     required ValidationValue<String?> position,
     required ValidationValue<String?> description,
   }) = _ExperienceState;
-}
 
-extension ExperienceStateExtension on ExperienceState {
+  @override
   List<ValidationValue> get validationFields => [
         startDate,
         endDate,
@@ -20,6 +21,4 @@ extension ExperienceStateExtension on ExperienceState {
         position,
         description,
       ];
-
-  bool get isValid => validationFields.every((element) => element.isValid);
 }

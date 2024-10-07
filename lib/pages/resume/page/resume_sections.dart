@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resume_crafter/core/router/routes.dart';
-import 'package:resume_crafter/data/resume_model.dart';
 import 'package:resume_crafter/data/resume_section_type.dart';
 import 'package:resume_crafter/pages/resume/bloc/resume_cubit.dart';
 import 'package:resume_crafter/pages/resume/bloc/resume_state.dart';
@@ -124,25 +123,23 @@ class ResumeLinkSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final links = state.links;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              type: SectionHeaderType.edit,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.links,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (links.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...links.map((e) => Text(e.url ?? 'xd')),
             ],
           ],
         );
@@ -175,8 +172,9 @@ class ResumeExperienceSectionView extends StatelessWidget {
                 extra: null,
               ),
             ),
-            if (experience.isEmpty) SectionHint(sectionType: resumeSectionType),
-            ...[
+            if (experience.isEmpty)
+              SectionHint(sectionType: resumeSectionType)
+            else ...[
               ...experience.map(
                 (item) => ExperienceShowcase(
                   experience: item,
@@ -206,24 +204,30 @@ class ResumeEducationSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final education = state.education;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.education,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (education.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              ...education.map(
+                (item) => EducationShowcase(
+                  education: item,
+                  onEditTap: () => context.goNamed(
+                    AppRoutes.education,
+                    extra: item,
+                  ),
+                ),
+              ),
             ],
           ],
         );
@@ -244,24 +248,23 @@ class ResumeCertificateSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final certificates = state.certificates;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.certificates,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (certificates.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...certificates.map((e) => Text(e.name ?? 'xd')),
             ],
           ],
         );
@@ -282,25 +285,23 @@ class ResumeSkillSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final skills = state.skills;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              type: SectionHeaderType.edit,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.skills,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (skills.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...skills.map((e) => Text(e.name ?? 'xd'))
             ],
           ],
         );
@@ -321,25 +322,23 @@ class ResumeLanguageSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final languages = state.languages;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              type: SectionHeaderType.edit,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.languages,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (languages.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...languages.map((e) => Text(e.name ?? 'xd'))
             ],
           ],
         );
@@ -360,24 +359,23 @@ class ResumePersonalProjectSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final personalProjects = state.personalProjects;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.personalProjects,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (personalProjects.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...personalProjects.map((e) => Text(e.name ?? 'xd'))
             ],
           ],
         );
@@ -398,24 +396,23 @@ class ResumeReferenceSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final references = state.references;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              type: SectionHeaderType.addNew,
+              onPressed: () => context.goNamed(
+                AppRoutes.references,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (references.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...references.map((e) => Text(e.name ?? 'xd'))
             ],
           ],
         );
@@ -436,24 +433,22 @@ class ResumePublicationSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final publications = state.publications;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              onPressed: () => context.goNamed(
+                AppRoutes.publications,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (publications.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...publications.map((e) => Text(e.name ?? 'xd'))
             ],
           ],
         );
@@ -474,24 +469,22 @@ class ResumeVolunteeringSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final volunteering = state.volunteering;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              onPressed: () => context.goNamed(
+                AppRoutes.volunteering,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (volunteering.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...volunteering.map((e) => Text(e.role ?? 'xd'))
             ],
           ],
         );
@@ -512,24 +505,22 @@ class ResumeCustomSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ResumeCubit, ResumeState>(
       builder: (context, state) {
-        final info = state.basics;
+        final customSection = state.customSections;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SectionHeader(
               sectionType: resumeSectionType,
-              onPressed: () {},
+              onPressed: () => context.goNamed(
+                AppRoutes.otherSection,
+                extra: null,
+              ),
             ),
-            if (info == null)
+            if (customSection.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              Text('Full name: ${info.firstName} ${info.lastName}'),
-              Text('Email: ${info.email}'),
-              Text('Phone: ${info.phone ?? 'Not provided'}'),
-              Text('Address: ${info.address ?? 'Not provided'}'),
-              Text('Birthday: ${info.birthday?.toString() ?? 'Not provided'}'),
-              const Text('Summary'),
-              Text(info.summary ?? 'Not provided'),
+              //TODO: Implement showcase
+              ...customSection.map((e) => Text(e.name ?? 'xd'))
             ],
           ],
         );

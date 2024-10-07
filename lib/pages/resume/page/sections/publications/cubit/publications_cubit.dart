@@ -6,38 +6,32 @@ import 'package:resume_crafter/utils/validation/validation_value.dart';
 import 'package:resume_crafter/utils/validation/validators.dart';
 import 'package:uuid/uuid.dart';
 
-part 'experience_state.dart';
-part 'experience_cubit.freezed.dart';
+part 'publications_state.dart';
+part 'publications_cubit.freezed.dart';
 
-class ExperienceCubit extends Cubit<ExperienceState> {
-  ExperienceCubit(ResumeExperience? experience)
+class PublicationsCubit extends Cubit<PublicationsState> {
+  PublicationsCubit(ResumePublication? publication)
       : super(
-          ExperienceState(
-            initialData: experience,
-            startDate: ValidationValue(
-              value: experience?.startDate,
+          PublicationsState(
+            initialData: publication,
+            publishDate: ValidationValue(
+              value: publication?.publishDate,
               validatorChain: const LogicalOrValidatorChain([
                 NotNullValidator(),
               ]),
             ),
-            endDate: ValidationValue(
-              value: experience?.endDate,
+            name: ValidationValue(
+              value: publication?.name,
               validatorChain: const LogicalOrValidatorChain([]),
             ),
-            company: ValidationValue(
-              value: experience?.company,
+            website: ValidationValue(
+              value: publication?.website,
               validatorChain: const LogicalOrValidatorChain([
                 NotNullValidator(),
               ]),
             ),
             description: ValidationValue(
-              value: experience?.description,
-              validatorChain: const LogicalOrValidatorChain([
-                NotNullValidator(),
-              ]),
-            ),
-            position: ValidationValue(
-              value: experience?.position,
+              value: publication?.description,
               validatorChain: const LogicalOrValidatorChain([
                 NotNullValidator(),
               ]),
@@ -45,18 +39,17 @@ class ExperienceCubit extends Cubit<ExperienceState> {
           ),
         );
 
-  ResumeExperience? buildExperience() {
+  ResumePublication? buildPublication() {
     if (!state.isValid) {
       return null;
     }
 
-    return ResumeExperience(
+    return ResumePublication(
       id: state.initialData?.id ?? const Uuid().v4(),
-      startDate: state.startDate.value,
-      company: state.company.value,
-      position: state.position.value,
+      name: state.name.value,
+      publishDate: state.publishDate.value,
+      website: state.website.value,
       description: state.description.value,
-      endDate: state.endDate.value,
     );
   }
 }

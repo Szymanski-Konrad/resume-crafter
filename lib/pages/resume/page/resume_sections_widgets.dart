@@ -226,3 +226,66 @@ class ExperienceShowcase extends StatelessWidget {
     );
   }
 }
+
+class EducationShowcase extends StatelessWidget {
+  const EducationShowcase({
+    super.key,
+    required this.education,
+    required this.onEditTap,
+  });
+
+  final ResumeEducation education;
+  final VoidCallback onEditTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final startDate = education.startDate;
+    final endDate = education.endDate ?? DateTime.now();
+    final dateFormat = DateFormat(
+      DateFormat.YEAR_NUM_MONTH,
+      context.l10n.localeName,
+    );
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: BorderRadius.circular(AppDimens.m),
+      ),
+      padding: AppPaddings.mAllPadding,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (startDate != null)
+                  Text(
+                    '${dateFormat.format(startDate)} - ${dateFormat.format(endDate)} (${endDate.difference(startDate).toTotalExpFormat()})',
+                    style: TextStyles.bodyGrey,
+                  ),
+                Text(education.university ?? 'university'),
+                Text(
+                    '${education.major} | ${education.degree} | ${education.rating}'),
+                Text(education.specialization ?? ''),
+                Text(education.description ?? ''),
+              ],
+            ),
+          ),
+          Gap.m,
+          IconButton(
+            onPressed: onEditTap,
+            icon: const Icon(Icons.edit),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LinksShowcase extends StatelessWidget {
+  const LinksShowcase({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

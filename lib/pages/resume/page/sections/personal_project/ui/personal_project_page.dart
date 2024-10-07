@@ -5,20 +5,20 @@ import 'package:resume_crafter/core/style/gaps.dart';
 import 'package:resume_crafter/core/style/paddings.dart';
 import 'package:resume_crafter/pages/resume/bloc/resume_cubit.dart';
 import 'package:resume_crafter/pages/resume/page/resume_sections_widgets.dart';
-import 'package:resume_crafter/pages/resume/page/sections/experience/cubit/experience_cubit.dart';
+import 'package:resume_crafter/pages/resume/page/sections/personal_project/cubit/personal_project_cubit.dart';
 import 'package:resume_crafter/ui/text_fields.dart';
 import 'package:resume_crafter/utils/extensions/build_context_extensions.dart';
 
-class ExperiencePage extends StatelessWidget {
-  const ExperiencePage({super.key});
+class PersonalProjectPage extends StatelessWidget {
+  const PersonalProjectPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ExperienceCubit, ExperienceState>(
+    return BlocBuilder<PersonalProjectCubit, PersonalProjectState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(context.l10n.experience),
+            title: Text(context.l10n.certificates),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -26,17 +26,22 @@ class ExperiencePage extends StatelessWidget {
               child: Column(
                 children: [
                   ValidatedTextField(
-                    validationValue: state.company,
-                    label: context.l10n.company,
+                    validationValue: state.description,
+                    label: context.l10n.description,
                     isRequired: true,
                   ),
-                  Gap.l,
+                  Gap.m,
                   ValidatedTextField(
-                    validationValue: state.position,
-                    label: context.l10n.position,
+                    validationValue: state.name,
+                    label: context.l10n.name,
                     isRequired: true,
                   ),
-                  Gap.l,
+                  Gap.m,
+                  ValidatedTextField(
+                    validationValue: state.website,
+                    label: context.l10n.website,
+                  ),
+                  Gap.m,
                   Row(
                     children: [
                       Expanded(
@@ -61,27 +66,22 @@ class ExperiencePage extends StatelessWidget {
                     ],
                   ),
                   Gap.l,
-                  ValidatedTextField(
-                    validationValue: state.description,
-                    label: context.l10n.description,
-                    minLines: 10,
-                    isRequired: true,
-                  ),
-                  Gap.l,
                   ElevatedButton(
                     onPressed: () {
-                      final experience =
-                          context.read<ExperienceCubit>().buildExperience();
-                      if (experience == null) {
+                      final personalProject = context
+                          .read<PersonalProjectCubit>()
+                          .buildPersonalProject();
+                      if (personalProject == null) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Error while saving experience'),
-                          ),
-                        );
+                            const SnackBar(
+                                content: Text(
+                                    'Error while saving personal project')));
                         //TODO: Show info that something goes wrong
                         return;
                       }
-                      context.read<ResumeCubit>().updateExperience(experience);
+                      context
+                          .read<ResumeCubit>()
+                          .updatePersonalProject(personalProject);
                       context.pop();
                     },
                     child: const Text('Save changes'),

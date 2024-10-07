@@ -11,6 +11,7 @@ enum ValidationValueError {
   tooShort,
   tooLong,
   invalidEmail,
+  invalidUrl,
 }
 
 extension ValidationValueErrorExtension on ValidationValueError {
@@ -31,6 +32,8 @@ extension ValidationValueErrorExtension on ValidationValueError {
         return 'Invalid email';
       case ValidationValueError.isNotNull:
         return 'Value is not null';
+      case ValidationValueError.invalidUrl:
+        return 'Invalid url';
     }
   }
 }

@@ -79,7 +79,9 @@ class ResumeEducation with _$ResumeEducation {
     DateTime? endDate,
     String? university,
     String? degree,
-    String? title,
+    String? rating,
+    String? major,
+    String? specialization,
     String? description,
   }) = _ResumeEducation;
 
@@ -120,7 +122,7 @@ class ResumeLanguage with _$ResumeLanguage {
   factory ResumeLanguage({
     String? id,
     String? name,
-    String? level,
+    int? level,
   }) = _ResumeLanguage;
 
   factory ResumeLanguage.fromJson(Map<String, dynamic> json) =>
@@ -192,6 +194,7 @@ class ResumeVolunteering with _$ResumeVolunteering {
 @freezed
 class ResumeCustomSection with _$ResumeCustomSection {
   factory ResumeCustomSection({
+    String? id,
     String? name,
     String? description,
     DateTime? startDate,
