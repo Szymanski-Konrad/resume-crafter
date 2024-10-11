@@ -73,5 +73,13 @@
   "place": "Miejsce",
   "emptyField": "To jest pole puste",
   "invalidEmail": "Niepoprawny email",
-  "chooseDate": "Wybierz datę"
+  "chooseDate": "Wybierz datę",
+  "yearsShort": "l",
+  "monthsShort": "mies",
+  "tooShortValue": "Zbyt krótka wartość",
+  "tooLongValue": "Zbyt długa wartość",
+  "notEmptyValue": "Wartość nie jest pusta",
+  "valueIsNull": "Brak wartości",
+  "isNotNull": "Nie jest nullem",
+  "invalidUrl": "Nieproprawny link"
 }

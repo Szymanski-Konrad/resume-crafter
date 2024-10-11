@@ -15,25 +15,24 @@ enum ValidationValueError {
 }
 
 extension ValidationValueErrorExtension on ValidationValueError {
-  //TODO: Add localization string here
   String errorMessage(BuildContext context) {
     switch (this) {
       case ValidationValueError.empty:
         return context.l10n.emptyField;
       case ValidationValueError.tooShort:
-        return 'Too short value';
+        return context.l10n.tooShortValue;
       case ValidationValueError.tooLong:
-        return 'Too long value';
+        return context.l10n.tooLongValue;
       case ValidationValueError.notEmpty:
-        return 'Not empty value';
+        return context.l10n.notEmptyValue;
       case ValidationValueError.isNull:
-        return 'Value is null';
+        return context.l10n.valueIsNull;
       case ValidationValueError.invalidEmail:
-        return 'Invalid email';
+        return context.l10n.invalidEmail;
       case ValidationValueError.isNotNull:
-        return 'Value is not null';
+        return context.l10n.isNotNull;
       case ValidationValueError.invalidUrl:
-        return 'Invalid url';
+        return context.l10n.invalidUrl;
     }
   }
 }

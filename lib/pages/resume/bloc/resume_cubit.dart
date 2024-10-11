@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resume_crafter/data/link_type.dart';
 import 'package:resume_crafter/data/resume_model.dart';
+import 'package:resume_crafter/data/resume_model_enums.dart';
 import 'package:resume_crafter/data/resume_section_type.dart';
 import 'package:resume_crafter/data/resume_step.dart';
 import 'package:resume_crafter/pages/resume/bloc/resume_state.dart';
@@ -192,5 +194,198 @@ class ResumeCubit extends Cubit<ResumeState> {
       list[index] = customSection;
     }
     emit(state.copyWith(customSections: list));
+  }
+
+  void removeExperience(ResumeExperience experience) {
+    final list = List.of(state.experience);
+    list.removeWhere((element) => element.id == experience.id);
+    emit(state.copyWith(experience: list));
+  }
+
+  void removeEducation(ResumeEducation education) {
+    final list = List.of(state.education);
+    list.removeWhere((element) => element.id == education.id);
+    emit(state.copyWith(education: list));
+  }
+
+  void removeLink(ResumeLink link) {
+    final list = List.of(state.links);
+    list.removeWhere((element) => element.id == link.id);
+    emit(state.copyWith(links: list));
+  }
+
+  void removeSkill(ResumeSkill skill) {
+    final list = List.of(state.skills);
+    list.removeWhere((element) => element.id == skill.id);
+    emit(state.copyWith(skills: list));
+  }
+
+  void removeCertificate(ResumeCertificate certificate) {
+    final list = List.of(state.certificates);
+    list.removeWhere((element) => element.id == certificate.id);
+    emit(state.copyWith(certificates: list));
+  }
+
+  void removeLanguage(ResumeLanguage language) {
+    final list = List.of(state.languages);
+    list.removeWhere((element) => element.id == language.id);
+    emit(state.copyWith(languages: list));
+  }
+
+  void removePersonalProject(ResumePersonalProject personalProject) {
+    final list = List.of(state.personalProjects);
+    list.removeWhere((element) => element.id == personalProject.id);
+    emit(state.copyWith(personalProjects: list));
+  }
+
+  void removePublication(ResumePublication publication) {
+    final list = List.of(state.publications);
+    list.removeWhere((element) => element.id == publication.id);
+    emit(state.copyWith(publications: list));
+  }
+
+  void removeReference(ResumeReference reference) {
+    final list = List.of(state.references);
+    list.removeWhere((element) => element.id == reference.id);
+    emit(state.copyWith(references: list));
+  }
+
+  void removeVolunteering(ResumeVolunteering volunteering) {
+    final list = List.of(state.volunteering);
+    list.removeWhere((element) => element.id == volunteering.id);
+    emit(state.copyWith(volunteering: list));
+  }
+
+  void removeCustomSection(ResumeCustomSection customSection) {
+    final list = List.of(state.customSections);
+    list.removeWhere((element) => element.id == customSection.id);
+    emit(state.copyWith(customSections: list));
+  }
+
+  void generateTemporaryResumeInState() {
+    emit(
+      state.copyWith(
+        volunteering: [
+          ResumeVolunteering(
+            id: '1',
+            description: 'volunteering',
+            endDate: DateTime.now(),
+            organization: 'UNICEF',
+            place: 'London',
+            role: 'Ticket man',
+            startDate: DateTime.now().subtract(const Duration(days: 5)),
+          ),
+        ],
+        references: [
+          ResumeReference(
+            id: '2',
+            name: 'Newest reference',
+            company: 'AppTailors',
+            jobTitle: 'Flutter Developer',
+            referenceEmail: 'a@.com',
+            referencePhone: '123 456 789',
+            website: 'www.example.com',
+            description: 'nice working, solid',
+          ),
+        ],
+        publications: [
+          ResumePublication(
+            id: '3',
+            name: 'Best publication',
+            description: 'time to resolve some unresolved math',
+            website: 'www.no-worries.com',
+            publishDate: DateTime(2023, 10, 25),
+          )
+        ],
+        basics: ResumeBasics(
+          id: '4',
+          firstName: 'Peter',
+          lastName: 'Hohland',
+          address: 'Greenwitch 24/7',
+          birthday: DateTime.now(),
+          email: 'resume.crafter@gmail.com',
+          phone: '123 456 789',
+          summary:
+              'Szukający pierwszych wyzwań zawodowych w dynamicznym środowisku. Posiadam solidną wiedzę teoretyczną z zakresu [przedmioty studiów] oraz umiejętności pracy zespołowej i szybkiego uczenia się. Chętny do zdobywania nowych doświadczeń i rozwoju zawodowego.',
+        ),
+        certificates: [
+          ResumeCertificate(
+            id: '5',
+            name: 'Certyfikat',
+            description: 'Dostałem nowy certyfikat',
+            expireAt: DateTime.now(),
+            issuedAt: DateTime(2024, 1, 5),
+            organization: 'UNICEF',
+            website: 'https://unicef.com',
+          ),
+        ],
+        education: [
+          ResumeEducation(
+            id: '6',
+            degree: 'inżynier',
+            description: 'Ciekawe studia',
+            endDate: DateTime(2023, 05, 11),
+            startDate: DateTime(2020, 9, 15),
+            major: 'Informatyka',
+            rating: '4.5',
+            specialization: 'Informatyka stosowana',
+            university: 'Politechnia Białostocka',
+          ),
+        ],
+        experience: [
+          ResumeExperience(
+            id: '7',
+            company: 'AppTailors',
+            description: 'Ciekawa praca',
+            endDate: DateTime.now(),
+            startDate: DateTime(2020, 1, 1),
+            position: 'Flutter Developer',
+          ),
+        ],
+        isGenerating: false,
+        languages: [
+          ResumeLanguage(
+              name: 'angielski', level: ResumeLanguageLevel.b2, id: '8'),
+          ResumeLanguage(
+              name: 'polski', level: ResumeLanguageLevel.native, id: '9'),
+        ],
+        links: [
+          ResumeLink(
+              linkType: LinkType.github, url: 'https://github.com', id: '10'),
+          ResumeLink(
+              linkType: LinkType.linkedIn,
+              url: 'https://linkedin.com',
+              id: '11'),
+        ],
+        skills: [
+          ResumeSkill(name: 'BLoC', level: 3, id: '12'),
+          ResumeSkill(name: 'Appwrite', level: 2, id: '13'),
+          ResumeSkill(name: 'Flutter', level: 5, id: '14'),
+          ResumeSkill(name: 'Dart', id: '15'),
+          ResumeSkill(name: 'Firebase', level: 0, id: '16'),
+        ],
+        resumeName: 'Testowe CV',
+        selectedSections: ResumeSectionType.values,
+        personalProjects: [
+          ResumePersonalProject(
+            id: '17',
+            name: 'Shop together',
+            description:
+                'Lista do współdzielenia listy zakupów w czasie rzeczywistym',
+            startDate: DateTime(2021, 5, 29),
+            endDate: DateTime.now(),
+            website: 'https://shop-together.dev',
+          ),
+          ResumePersonalProject(
+            id: '18',
+            name: 'Smart car',
+            description: 'Nadzorowanie pracy samochodu',
+            startDate: DateTime(2023, 5, 29),
+            endDate: DateTime(2024, 3, 19),
+            website: 'https://smart-car.dev',
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -138,8 +138,13 @@ class ResumeLinkSectionView extends StatelessWidget {
             if (links.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...links.map((e) => Text(e.url ?? 'xd')),
+              ...links.map(
+                (e) => LinkShowcase(
+                  link: e,
+                  onEditTap: () => context.goNamed(AppRoutes.links, extra: e),
+                  onRemoveTap: () => context.read<ResumeCubit>().removeLink(e),
+                ),
+              ),
             ],
           ],
         );
@@ -182,6 +187,8 @@ class ResumeExperienceSectionView extends StatelessWidget {
                     AppRoutes.experience,
                     extra: item,
                   ),
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removeExperience(item),
                 ),
               ),
             ],
@@ -222,6 +229,8 @@ class ResumeEducationSectionView extends StatelessWidget {
               ...education.map(
                 (item) => EducationShowcase(
                   education: item,
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removeEducation(item),
                   onEditTap: () => context.goNamed(
                     AppRoutes.education,
                     extra: item,
@@ -263,8 +272,17 @@ class ResumeCertificateSectionView extends StatelessWidget {
             if (certificates.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...certificates.map((e) => Text(e.name ?? 'xd')),
+              ...certificates.map(
+                (e) => CertificateShowcase(
+                  certificate: e,
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removeCertificate(e),
+                  onEditTap: () => context.goNamed(
+                    AppRoutes.certificates,
+                    extra: e,
+                  ),
+                ),
+              ),
             ],
           ],
         );
@@ -300,8 +318,13 @@ class ResumeSkillSectionView extends StatelessWidget {
             if (skills.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...skills.map((e) => Text(e.name ?? 'xd'))
+              ...skills.map(
+                (e) => SkillShowcase(
+                  skill: e,
+                  onEditTap: () => context.goNamed(AppRoutes.skills, extra: e),
+                  onRemoveTap: () => context.read<ResumeCubit>().removeSkill(e),
+                ),
+              )
             ],
           ],
         );
@@ -337,8 +360,15 @@ class ResumeLanguageSectionView extends StatelessWidget {
             if (languages.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...languages.map((e) => Text(e.name ?? 'xd'))
+              ...languages.map(
+                (e) => LanguageShowcase(
+                  language: e,
+                  onRemoveTap: () =>
+                      context.goNamed(AppRoutes.languages, extra: e),
+                  onEditTap: () =>
+                      context.read<ResumeCubit>().removeLanguage(e),
+                ),
+              ),
             ],
           ],
         );
@@ -374,8 +404,15 @@ class ResumePersonalProjectSectionView extends StatelessWidget {
             if (personalProjects.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...personalProjects.map((e) => Text(e.name ?? 'xd'))
+              ...personalProjects.map(
+                (e) => PersonalProjectShowcase(
+                  personalProject: e,
+                  onEditTap: () =>
+                      context.goNamed(AppRoutes.personalProjects, extra: e),
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removePersonalProject(e),
+                ),
+              )
             ],
           ],
         );
@@ -411,8 +448,15 @@ class ResumeReferenceSectionView extends StatelessWidget {
             if (references.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...references.map((e) => Text(e.name ?? 'xd'))
+              ...references.map(
+                (e) => ReferenceShowcase(
+                  reference: e,
+                  onEditTap: () =>
+                      context.goNamed(AppRoutes.references, extra: e),
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removeReference(e),
+                ),
+              ),
             ],
           ],
         );
@@ -447,8 +491,15 @@ class ResumePublicationSectionView extends StatelessWidget {
             if (publications.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...publications.map((e) => Text(e.name ?? 'xd'))
+              ...publications.map(
+                (e) => PublicationShowcase(
+                  publication: e,
+                  onEditTap: () =>
+                      context.goNamed(AppRoutes.publications, extra: e),
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removePublication(e),
+                ),
+              ),
             ],
           ],
         );
@@ -483,8 +534,15 @@ class ResumeVolunteeringSectionView extends StatelessWidget {
             if (volunteering.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...volunteering.map((e) => Text(e.role ?? 'xd'))
+              ...volunteering.map(
+                (e) => VolunteeringShowcase(
+                  volunteering: e,
+                  onEditTap: () =>
+                      context.goNamed(AppRoutes.volunteering, extra: e),
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removeVolunteering(e),
+                ),
+              ),
             ],
           ],
         );
@@ -519,8 +577,15 @@ class ResumeCustomSectionView extends StatelessWidget {
             if (customSection.isEmpty)
               SectionHint(sectionType: resumeSectionType)
             else ...[
-              //TODO: Implement showcase
-              ...customSection.map((e) => Text(e.name ?? 'xd'))
+              ...customSection.map(
+                (e) => CustomSectionShowcase(
+                  customSection: e,
+                  onEditTap: () =>
+                      context.goNamed(AppRoutes.otherSection, extra: e),
+                  onRemoveTap: () =>
+                      context.read<ResumeCubit>().removeCustomSection(e),
+                ),
+              ),
             ],
           ],
         );

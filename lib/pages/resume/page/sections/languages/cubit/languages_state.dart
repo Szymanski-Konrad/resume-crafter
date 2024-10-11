@@ -7,7 +7,7 @@ class LanguagesState with _$LanguagesState, ValidationMixin {
   const factory LanguagesState({
     ResumeLanguage? initialData,
     required ValidationValue<String?> name,
-    required ValidationValue<int?> level,
+    required ValidationValue<ResumeLanguageLevel?> level,
   }) = _LanguagesState;
 
   @override

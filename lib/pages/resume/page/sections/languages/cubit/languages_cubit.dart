@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resume_crafter/data/resume_model.dart';
+import 'package:resume_crafter/data/resume_model_enums.dart';
 import 'package:resume_crafter/utils/validation/validation_mixin.dart';
 import 'package:resume_crafter/utils/validation/validation_value.dart';
 import 'package:resume_crafter/utils/validation/validators.dart';

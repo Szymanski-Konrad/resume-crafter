@@ -73,5 +73,13 @@
   "place": "Place",
   "emptyField": "This field is empty",
   "invalidEmail": "Invalid email format",
-  "chooseDate": "Choose date"
+  "chooseDate": "Choose date",
+  "yearsShort": "y",
+  "monthsShort": "mos",
+  "tooShortValue": "Too short value",
+  "tooLongValue": "Too long value",
+  "notEmptyValue": "Not empty value",
+  "valueIsNull": "Value is null",
+  "isNotNull": "Is not null",
+  "invalidUrl": "Invalid url"
 }

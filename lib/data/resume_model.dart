@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resume_crafter/data/link_type.dart';
+import 'package:resume_crafter/data/resume_model_enums.dart';
 
 part 'resume_model.freezed.dart';
 part 'resume_model.g.dart';
@@ -122,7 +123,7 @@ class ResumeLanguage with _$ResumeLanguage {
   factory ResumeLanguage({
     String? id,
     String? name,
-    int? level,
+    ResumeLanguageLevel? level,
   }) = _ResumeLanguage;
 
   factory ResumeLanguage.fromJson(Map<String, dynamic> json) =>

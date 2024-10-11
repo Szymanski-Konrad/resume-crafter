@@ -122,7 +122,10 @@ class UrlValidator extends Validator<String> {
 
   @override
   ValidationValueError? validate(String value) {
-    if (!Uri.parse(value).isAbsolute) return ValidationValueError.invalidUrl;
+    final url = Uri.tryParse(value);
+    if (url != null) {
+      return ValidationValueError.invalidUrl;
+    }
     return null;
   }
 }

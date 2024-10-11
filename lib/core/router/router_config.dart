@@ -68,7 +68,9 @@ final GoRouter router = GoRouter(
         ShellRoute(
           builder: (context, state, child) {
             return BlocProvider(
-              create: (context) => ResumeCubit(),
+              create: (context) =>
+                  //TODO: Remove this after design showcases for all sections
+                  ResumeCubit()..generateTemporaryResumeInState(),
               child: child,
             );
           },
