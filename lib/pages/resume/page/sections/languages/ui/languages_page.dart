@@ -30,6 +30,7 @@ class LanguagesPage extends StatelessWidget {
                     isRequired: true,
                   ),
                   Gap.l,
+                  //TODO: Add slider to select level
                   ElevatedButton(
                     onPressed: () {
                       final language =

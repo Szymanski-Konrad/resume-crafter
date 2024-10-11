@@ -363,9 +363,9 @@ class ResumeLanguageSectionView extends StatelessWidget {
               ...languages.map(
                 (e) => LanguageShowcase(
                   language: e,
-                  onRemoveTap: () =>
-                      context.goNamed(AppRoutes.languages, extra: e),
                   onEditTap: () =>
+                      context.goNamed(AppRoutes.languages, extra: e),
+                  onRemoveTap: () =>
                       context.read<ResumeCubit>().removeLanguage(e),
                 ),
               ),

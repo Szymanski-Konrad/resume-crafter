@@ -383,32 +383,32 @@ class SkillShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final level = skill.level;
-    return Chip(
-      label: Row(
-        children: [
-          Expanded(
-            child: ResumeText(
-              text: skill.name,
-              hint: context.l10n.name,
-            ),
+    return Row(
+      children: [
+        Expanded(
+          child: ResumeText(
+            text: skill.name,
+            hint: context.l10n.name,
           ),
-          if (level != null && level > 0) ...[
-            Gap.s,
-            Expanded(
-              child: LinearProgressIndicator(
-                value: level / Constants.maxSkillLevel,
-              ),
-            ),
-          ],
+        ),
+        if (level != null && level > 0) ...[
           Gap.s,
-          IconButton(
-            onPressed: onEditTap,
-            icon: const Icon(Icons.edit),
+          Expanded(
+            child: LinearProgressIndicator(
+              value: level / Constants.maxSkillLevel,
+            ),
           ),
         ],
-      ),
-      deleteIcon: const Icon(Icons.delete),
-      onDeleted: onRemoveTap,
+        Gap.s,
+        IconButton(
+          onPressed: onEditTap,
+          icon: const Icon(Icons.edit),
+        ),
+        IconButton(
+          onPressed: onRemoveTap,
+          icon: const Icon(Icons.delete),
+        ),
+      ],
     );
   }
 }
@@ -428,24 +428,30 @@ class LanguageShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final level = language.level;
-    return Chip(
-      onDeleted: onEditTap,
-      label: Row(
-        children: [
-          Expanded(
-            child: ResumeText(
-              text: language.name,
-              hint: context.l10n.name,
-            ),
+    return Row(
+      children: [
+        Expanded(
+          child: ResumeText(
+            text: language.name,
+            hint: context.l10n.name,
           ),
-          if (level != null) ...[
-            Gap.s,
-            Expanded(
-              child: LinearProgressIndicator(value: level.levelProgress),
-            ),
-          ],
+        ),
+        if (level != null) ...[
+          Gap.s,
+          Expanded(
+            child: LinearProgressIndicator(value: level.levelProgress),
+          ),
         ],
-      ),
+        Gap.s,
+        IconButton(
+          onPressed: onEditTap,
+          icon: const Icon(Icons.edit),
+        ),
+        IconButton(
+          onPressed: onRemoveTap,
+          icon: const Icon(Icons.delete),
+        ),
+      ],
     );
   }
 }

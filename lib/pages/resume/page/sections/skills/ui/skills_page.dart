@@ -30,6 +30,7 @@ class SkillsPage extends StatelessWidget {
                     isRequired: true,
                   ),
                   Gap.l,
+                  //TODO: Add slider to select level
                   ElevatedButton(
                     onPressed: () {
                       final skill = context.read<SkillsCubit>().buildSkill();
